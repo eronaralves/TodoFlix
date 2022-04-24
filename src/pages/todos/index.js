@@ -1,0 +1,56 @@
+import React from "react"
+
+//Utils
+import {Posters} from "../../Utils/consts"
+
+// Components
+import Card from "../../components/Card";
+import Container from "../../components/Container"
+import Modal from "../../components/Modal"
+
+
+
+import {
+  Content,
+  BoxCards
+} from "./styles"
+
+export default class Todos extends React.Component {
+  state = {
+    posters: Posters,
+    itemSelecionado: null
+  }
+x
+  handleShowModal = (item) => {
+    
+    this.setState({
+      itemSelecionado: item
+    })
+    // console.log(this.state.itemSelecionado)
+  } 
+
+  back = () => {
+    this.setState({
+      itemSelecionado: null
+    })
+  }
+
+  
+  render(){
+    return(
+        <Container>
+          <Modal item={this.state.itemSelecionado} onClose={() => this.back()}/>
+          <Content>  
+            <h2>Todos</h2>
+            <BoxCards>
+            {this.state.posters.map((item, index) => (
+              <Card key={index} item={item} onClick={() => this.handleShowModal(item)}/>
+            ))}
+            </BoxCards>
+         </Content>
+        </Container>
+        
+      
+    )
+  }
+}
