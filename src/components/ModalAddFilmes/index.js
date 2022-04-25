@@ -29,8 +29,9 @@ const infoStars = {
 }
 
 
+
 export default class ModalAddFilmes extends React.Component {
- 
+  
 
   render(){
     return(
@@ -46,14 +47,14 @@ export default class ModalAddFilmes extends React.Component {
               
               <BoxLabel>
                 <label htmlFor="name">Nome</label>
-                <input id="name"ype="text" wrap="hard"/>
+                <input id="name"ype="text" wrap="hard" onChange={this.teste}/>
               </BoxLabel>
               <BoxLabel>
                 <div>
                   <label htmlFor="descricao">Descrição</label>
                   <span>0/200</span>
                   </div>
-                <textarea  id="nao-assistido" cols="30" rows="5" ></textarea>
+                <textarea  id="nao-assistido" cols="30" rows="5" onChange={this.teste}></textarea>
               </BoxLabel>
 
 
@@ -91,7 +92,7 @@ export default class ModalAddFilmes extends React.Component {
           </BoxForm>
           <Boxconfirmation>
             <button>Cancelar</button>
-            <button onClick={() => this.localInput()}>Confirmar</button>
+            <button>Confirmar</button>
           </Boxconfirmation>
         </Content>
       )}
