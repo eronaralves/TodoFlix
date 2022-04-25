@@ -51,7 +51,9 @@ export default class Favoritos extends React.Component {
     render(){
       return(
         <Container>
-        <Modal item={this.state.itemSelecionado} onClose={() => this.back()}/>
+        {this.state.itemSelecionado && (
+          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+        )}
         <Content>  
           <h2>Favoritos</h2>
           <BoxCards>

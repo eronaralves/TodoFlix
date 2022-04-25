@@ -36,7 +36,7 @@ export const ContentCard = styled.div`
     top: 5px;
     
 
-    z-index: 2;
+    z-index: 1;
   }
 
   h3 {

@@ -46,7 +46,9 @@ export default function Pesquisa(){
 
   return(
         <Container>
-          <Modal item={itemSelecionado} onClose={() => back()}/>
+         {this.state.itemSelecionado && (
+          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+        )}
           <Content>
             <h2 ><strong>Pesquisa: </strong> {valueSearch}</h2>
             

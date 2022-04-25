@@ -39,7 +39,9 @@ x
   render(){
     return(
         <Container>
-          <Modal item={this.state.itemSelecionado} onClose={() => this.back()}/>
+          {this.state.itemSelecionado && (
+          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+        )}
           <Content>  
             <h2>Todos</h2>
             <BoxCards>

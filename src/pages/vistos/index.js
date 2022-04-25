@@ -53,7 +53,9 @@ export default class Vistos extends React.Component {
       
       return(
         <Container>
-          <Modal item={this.state.itemSelecionado} onClose={() => this.back()}/>
+          {this.state.itemSelecionado && (
+          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+        )}
           <Content>  
             <h2>Ja assistidos</h2>
             <BoxCards>
