@@ -54,7 +54,7 @@ export default class ModalAddFilmes extends React.Component {
                   <label htmlFor="descricao">Descrição</label>
                   <span>0/200</span>
                   </div>
-                <textarea  id="nao-assistido" cols="30" rows="5" onChange={this.teste}></textarea>
+                <textarea  id="nao-assistido" cols="30" rows="5" ></textarea>
               </BoxLabel>
 
 
