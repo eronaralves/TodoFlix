@@ -32,6 +32,7 @@ export default function Nav() {
   const [routeBack, setRouteBack] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [modalAtivar, setmodalAtivar] = useState(false)
+  const [itemSelecionado, setItemSelecionado] = useState(null)
 
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
@@ -77,7 +78,7 @@ export default function Nav() {
 
   return(
     <>
-      <ModalAddFilmes showModal={modalAtivar} onClose={() => closeModal()}/>
+      <ModalAddFilmes showModal={modalAtivar} onClose={() => closeModal()} modalAtivar={setmodalAtivar}/>
        
       <Navigation>
         <Container>

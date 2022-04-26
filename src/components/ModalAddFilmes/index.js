@@ -56,12 +56,31 @@ export default class ModalAddFilmes extends React.Component {
   }
 
   StorageInput = () => {
-    let storageAdicionados =  []
-
-    storageAdicionados = this.state
-    localStorage.setItem("adicionados", JSON.stringify(storageAdicionados));
+    const itemClicado = this.state
+    const storageAssistidos = JSON.parse(localStorage.getItem("adicionados")) || [];
     
-    storageAdicionados = [this.state]
+    
+    if(storageAssistidos) {
+      if(storageAssistidos  !== "") {
+        let novos = [
+          ...storageAssistidos,
+          itemClicado
+        ]
+
+        localStorage.setItem("adicionados", JSON.stringify(novos));
+      }
+    } else {
+      let novos = [
+        itemClicado
+      ]
+      localStorage.setItem("adicionados", JSON.stringify(novos));
+    }
+
+    this.props.modalAtivar(false)
+  }
+
+  sairDoModal = () => {
+    this.props.modalAtivar(false)
   }
 
   render(){
@@ -122,7 +141,7 @@ export default class ModalAddFilmes extends React.Component {
             </BoxCoverImage>
           </BoxForm>
           <Boxconfirmation>
-            <button>Cancelar</button>
+            <button onClick={() => this.sairDoModal()}>Cancelar</button>
             <button onClick={() => this.StorageInput()}>Confirmar</button>
           </Boxconfirmation>
         </Content>
