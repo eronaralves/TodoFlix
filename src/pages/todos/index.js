@@ -49,7 +49,7 @@ x
               <Card key={index} item={item} onClick={() => this.handleShowModal(item)}/>
             ))}
             </BoxCards>
-         </Content>
+          </Content>
         </Container>
         
       

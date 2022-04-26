@@ -94,7 +94,7 @@ export default function Nav() {
                     <Link to="/todos">Todos</Link>
                     <Link to="/favoritos">Favoritos</Link>
                     <Link to="/vistos">Já vistos</Link>
-                    <Link to="/">Adicionados</Link>
+                    <Link to="/adicionados">Adicionados</Link>
                   </div>
                 </li>
                 

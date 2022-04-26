@@ -3,6 +3,7 @@ import ReactStars from "react-rating-stars-component";
 
 //images
 import EmptyImage from "../../assets/images/empty-image.svg"
+import Shrek from "../../assets/images/shrek.png"
 
 //icons
 import { IoClose} from 'react-icons/io5';
@@ -31,7 +32,37 @@ const infoStars = {
 
 
 export default class ModalAddFilmes extends React.Component {
-  
+  state = {
+    
+    id: 1,
+    name: "",
+    img: Shrek,
+    info: "",
+    jaAssisti: false,
+    nota: 4,
+    
+  }
+
+  inputNome = (event) => {
+    this.setState({
+      name: event.target.value,
+    })
+  }
+
+  inputTextArea = (event) => {
+    this.setState({
+      info: event.target.value,
+    })
+  }
+
+  StorageInput = () => {
+    let storageAdicionados =  []
+
+    storageAdicionados = this.state
+    localStorage.setItem("adicionados", JSON.stringify(storageAdicionados));
+    
+    storageAdicionados = [this.state]
+  }
 
   render(){
     return(
@@ -47,14 +78,14 @@ export default class ModalAddFilmes extends React.Component {
               
               <BoxLabel>
                 <label htmlFor="name">Nome</label>
-                <input id="name"ype="text" wrap="hard" onChange={this.teste}/>
+                <input id="name"ype="text" wrap="hard" onChange={this.inputNome}/>
               </BoxLabel>
               <BoxLabel>
                 <div>
                   <label htmlFor="descricao">Descrição</label>
                   <span>0/200</span>
                   </div>
-                <textarea  id="nao-assistido" cols="30" rows="5" ></textarea>
+                <textarea  id="nao-assistido" cols="30" rows="5" onChange={this.inputTextArea}></textarea>
               </BoxLabel>
 
 
@@ -92,7 +123,7 @@ export default class ModalAddFilmes extends React.Component {
           </BoxForm>
           <Boxconfirmation>
             <button>Cancelar</button>
-            <button>Confirmar</button>
+            <button onClick={() => this.StorageInput()}>Confirmar</button>
           </Boxconfirmation>
         </Content>
       )}

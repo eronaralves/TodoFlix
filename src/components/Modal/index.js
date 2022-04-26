@@ -54,7 +54,7 @@ export default class Moda extends React.Component {
       localStorage.setItem("assistidos", JSON.stringify(todosMenosOqueEuQuero));
 
       this.setState({
-        oAssistido: true
+        oAssistido: !this.state.oAssistido
       })
     }
 

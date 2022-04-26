@@ -13,8 +13,7 @@ import Pesquisa from "./pages/pesquisa"
 import Home from "./pages/home"
 import Favoritos from "./pages/favoritos"
 import Vistos from "./pages/vistos"
-
-
+import Adicionados from "./pages/adicionados"
 import Nav from "./components/nav"
 
 import { createGlobalStyle } from "styled-components";
@@ -48,6 +47,7 @@ export default class App extends React.Component{
           <Route path="/pesquisa" element={<Pesquisa/>}/>
           <Route path="/favoritos" element={<Favoritos/>}/>
           <Route path="/vistos" element={<Vistos/>}/>
+          <Route path="/adicionados" element={<Adicionados/>}/>
         </Routes>
       </Router>
 
