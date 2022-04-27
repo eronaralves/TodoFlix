@@ -1,5 +1,11 @@
 import React from 'react';
 
+import Shrek from "../../assets/images/shrek.png"
+import SpiderMan from "../../assets/images/homem-aranha.png"
+import HojeQueroVoltar from "../../assets/images/hoje-eu-quero-voltar-sozinho.png"
+import QueHorasELa from "../../assets/images/que-horas-ela-volta.png"
+import UmSonhoLiberdador from "../../assets/images/um-sonho-liberdade.png"
+
 //icons
 import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 

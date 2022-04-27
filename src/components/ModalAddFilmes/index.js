@@ -61,14 +61,12 @@ export default class ModalAddFilmes extends React.Component {
     
     
     if(storageAssistidos) {
-      if(storageAssistidos  !== "") {
         let novos = [
           ...storageAssistidos,
           itemClicado
         ]
 
         localStorage.setItem("adicionados", JSON.stringify(novos));
-      }
     } else {
       let novos = [
         itemClicado
