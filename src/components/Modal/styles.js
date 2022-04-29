@@ -1,5 +1,17 @@
 import styled from "styled-components"
 
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+  transform: translate(-50%, -50%);
+
+`
 
 export const Modal = styled.div`
   width: 100%;
@@ -15,7 +27,7 @@ export const Modal = styled.div`
   
   border: 2px solid #808080;
   border-radius: 10px;
-  z-index: 3;
+  z-index: 5;
 
   padding: 30px;
 
@@ -45,6 +57,7 @@ export const BoxButtonnBack = styled.div`
   svg {
     cursor: pointer;
   }
+
 `
 
 export const Button = styled.button`

@@ -79,12 +79,11 @@ export default function Nav() {
   return(
     <>
       <ModalAddFilmes showModal={modalAtivar} onClose={() => closeModal()} modalAtivar={setmodalAtivar}/>
-       
       <Navigation>
         <Container>
           <Content>
             <BoxLogo>
-              <img src={ImageLogo} alt="Logo da Todoflix" width="103px" height="40px"/>
+              <Link to="/"> <img src={ImageLogo} alt="Logo da Todoflix" width="103px" height="40px"/></Link>
               <List>
                 <li><Link className="responsivo" to="/">Inicio</Link></li>
 
@@ -98,7 +97,6 @@ export default function Nav() {
                     <Link to="/adicionados">Adicionados</Link>
                   </div>
                 </li>
-                
               </List>
             </BoxLogo>
 
@@ -114,13 +112,10 @@ export default function Nav() {
                   <input type="text" placeholder="Buscar" onChange={onChangeValue}/>
                 </SubmitLine>
               </BoxPesquisa>
-
-             
-                <img className="image-perfil" src={Perfil} width="32px" height="32px"/>
+              <img className="image-perfil" src={Perfil} width="32px" height="32px"/>
                
             </BoxPerfil>
           </Content>
-
         </Container>
       </Navigation>
     </>

@@ -40,7 +40,7 @@ export default class Home extends React.Component {
   
   state = {
     posters: Posters,
-    itemSelecionado: null,
+    itemSelecionado: null
   }
 
   myArrow({ type, onClick, isEdge }) {
@@ -64,6 +64,27 @@ export default class Home extends React.Component {
       itemSelecionado: null
     })
   }
+  Favoritos = () =>  {
+    const itemClicado = this.props.item
+    const storageFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    const temItem = storageFavoritos.find((item) => item.id === itemClicado.id)
+
+    if (!temItem) {
+      const novosFavoritos = [
+        ...storageFavoritos,
+        itemClicado
+      ]
+      
+      localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
+      
+    } else {
+      const todosMenosOqueEuQuero = storageFavoritos.filter((item) => item.id !== itemClicado.id)
+
+      localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
+
+      
+    }
+  }
 
 
   render(){
@@ -72,15 +93,14 @@ export default class Home extends React.Component {
     return(
       <>
         {this.state.itemSelecionado && (
-          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} favoritosModal={() => this.favoritos()} ></Modal>
         )}
 
         <Container>
           <BoxDestaque>
             <img src={CapitaoFantastico} alt="Capa do filme Capitão Fantastico" width="450px"/> 
             <InfoDestaque>
-            
-              <span>Visto recentemente</span>
+              <span>Visto recentemente</span> 
               <h2>Capitão Fantástico</h2>
               <p>Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.</p>
             </InfoDestaque>  

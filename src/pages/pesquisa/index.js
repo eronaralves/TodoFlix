@@ -23,6 +23,7 @@ export default function Pesquisa(){
   const [postersFiltrados, setPostersFiltrados] = useState([])
   const [valueSearch, setValueSearch] = useState("")
   const [itemSelecionado, setItemSelecionado] = useState(null)
+  
   const { search } = useLocation();
 
   const handleShowModal = (item) => {
@@ -46,19 +47,17 @@ export default function Pesquisa(){
 
   return(
         <Container>
-         {itemSelecionado && (
-          <Modal item={itemSelecionado} onClose={() => back()} ></Modal>
-        )}
+          {itemSelecionado && (
+            <Modal item={itemSelecionado} onClose={() => back()} ></Modal>
+          )}
           <Content>
             <h2 ><strong>Pesquisa: </strong> {valueSearch}</h2>
-            
             <BoxCards>
-              
-            {postersFiltrados.map((item, index) => (
-              <Card key={index} item={item} onClick={() => handleShowModal(item)}/>
-            ))}
+              {postersFiltrados.map((item, index) => (
+                <Card key={index} item={item} onClick={() => handleShowModal(item)} />
+              ))}
             </BoxCards>
-         </Content>
+          </Content>
         </Container>
   )
 }

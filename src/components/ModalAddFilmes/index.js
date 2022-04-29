@@ -10,6 +10,7 @@ import { IoClose} from 'react-icons/io5';
 
 
 import {
+  Container,
   Content,
   BoxOnCLocse,
   BoxForm,
@@ -34,7 +35,7 @@ const infoStars = {
 export default class ModalAddFilmes extends React.Component {
   state = {
     
-    id: 1,
+
     name: "",
     img: Shrek,
     info: "",
@@ -84,65 +85,65 @@ export default class ModalAddFilmes extends React.Component {
   render(){
     return(
       <>
-      {this.props.showModal && (
-        <Content>
-          <BoxOnCLocse onClick={this.props.onClose}>
-            <IoClose size={30} color="#fff" />
-          </BoxOnCLocse>
-          <BoxForm>
-            <form>
-              <h2>Editar Dados</h2>
-              
-              <BoxLabel>
-                <label htmlFor="name">Nome</label>
-                <input id="name"ype="text" wrap="hard" onChange={this.inputNome}/>
-              </BoxLabel>
-              <BoxLabel>
-                <div>
-                  <label htmlFor="descricao">Descrição</label>
-                  <span>0/200</span>
+        {this.props.showModal && (
+        <>
+          <Container onClick={this.props.onClose}>
+          </Container>
+          <Content>
+            <BoxOnCLocse onClick={this.props.onClose}>
+              <IoClose size={30} color="#fff" />
+            </BoxOnCLocse>
+            <BoxForm>
+              <form>
+                <h2>Editar Dados</h2>
+                
+                <BoxLabel>
+                  <label htmlFor="name">Nome</label>
+                  <input id="name"ype="text" wrap="hard" onChange={this.inputNome}/>
+                </BoxLabel>
+                <BoxLabel>
+                  <div>
+                    <label htmlFor="descricao">Descrição</label>
+                    <span>0/200</span>
+                    </div>
+                  <textarea  id="nao-assistido" cols="30" rows="5" onChange={this.inputTextArea}></textarea>
+                </BoxLabel>
+
+                <label>Status</label>
+                <BoxRadio>
+                  <div>
+                    <input id="assistido" type="radio" />
+                    <label htmlFor="assistido">Já assisti</label> 
                   </div>
-                <textarea  id="nao-assistido" cols="30" rows="5" onChange={this.inputTextArea}></textarea>
-              </BoxLabel>
-
-
-              <label>Status</label>
-              <BoxRadio>
-                <div>
-                  <input id="assistido" type="radio" />
-                  <label htmlFor="assistido">Já assisti</label>
-                  
-                </div>
-                <div>
-                  <input id="nao-assistido" type="radio" />
-                  <label htmlFor="nao-assistido">Ainda não assisti </label>
-                  
-                </div>
-              </BoxRadio>
-              <BoxNota>
-                <h3>Nota</h3>
-                <div>
-                  <ReactStars {...infoStars}/> 
-                  (0/5)
-                </div>
+                  <div>
+                    <input id="nao-assistido" type="radio" />
+                    <label htmlFor="nao-assistido">Ainda não assisti </label>
+                  </div>
+                </BoxRadio>
+                <BoxNota>
+                  <h3>Nota</h3>
+                  <div>
+                    <ReactStars {...infoStars}/> 
+                    (0/5)
+                  </div>
                 </BoxNota>
-              
+              </form>
 
-            </form>
-            <BoxCoverImage>
-              <h3>imagem de Capa</h3>
-              <div>
-                <img src={EmptyImage} alt="Image vazia"/>
-              </div>
-              
-              <button>Selecionar imagem</button>
-            </BoxCoverImage>
-          </BoxForm>
-          <Boxconfirmation>
-            <button onClick={() => this.sairDoModal()}>Cancelar</button>
-            <button onClick={() => this.StorageInput()}>Confirmar</button>
-          </Boxconfirmation>
-        </Content>
+              <BoxCoverImage>
+                <h3>imagem de Capa</h3>
+                <div>
+                  <img src={EmptyImage} alt="Image vazia"/>
+                </div>
+                <button>Selecionar imagem</button>
+              </BoxCoverImage>
+
+            </BoxForm>
+            <Boxconfirmation>
+              <button onClick={() => this.sairDoModal()}>Cancelar</button>
+              <button onClick={() => this.StorageInput()}>Confirmar</button>
+            </Boxconfirmation>
+          </Content>
+        </>
       )}
       </>
     );

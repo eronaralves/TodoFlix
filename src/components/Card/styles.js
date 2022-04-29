@@ -30,13 +30,21 @@ export const ContentCard = styled.div`
 
   
 
-  .container-favorito {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    
+  .icon-favoritos {
+      position: absolute;
+      right: 5px;
+      top: 5px;
 
-    z-index: 1;
+      z-index: 1;
+    
+  }
+
+  .icon-close {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+    z-index: 2;
   }
 
   h3 {

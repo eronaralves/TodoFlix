@@ -18,7 +18,8 @@ export default class Favoritos extends React.Component {
   
   state = {
     todosFavoritos: [],
-    itemSelecionado: null
+    itemSelecionado: null,
+    close: false
   }
 
 
@@ -51,19 +52,18 @@ export default class Favoritos extends React.Component {
     render(){
       return(
         <Container>
-        {this.state.itemSelecionado && (
-          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
-        )}
-        <Content>  
-          <h2>Favoritos</h2>
-          <BoxCards>
-          {this.state.todosFavoritos.map((item, index) => (
-            <Card key={index} item={item} onClick={() => this.handleShowModal(item)}/>
-          ))}
-          </BoxCards>
-       </Content>
-      </Container>
-        
+          {this.state.itemSelecionado && (
+            <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+          )}
+          <Content>  
+            <h2>Favoritos</h2>
+            <BoxCards>
+              {this.state.todosFavoritos.map((item, index) => (
+                <Card key={index} item={item} onClick={() => this.handleShowModal(item)} close={this.state.close}/>
+              ))}
+            </BoxCards>
+          </Content>
+        </Container>  
       )
     }
 }

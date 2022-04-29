@@ -7,7 +7,7 @@ import QueHorasELa from "../../assets/images/que-horas-ela-volta.png"
 import UmSonhoLiberdador from "../../assets/images/um-sonho-liberdade.png"
 
 //icons
-import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
+import { IoHeartOutline, IoHeartSharp, IoClose } from 'react-icons/io5';
 
 import {
   CardContainer,
@@ -21,6 +21,7 @@ import {
 export default class Card extends React.Component {
   state = {
     eFavorito: false
+   
   }
 
   adiconarFvoritos = () => {
@@ -30,29 +31,44 @@ export default class Card extends React.Component {
     
     const temItem = storageFavoritos.find((item) => item.id === itemClicado.id);
     
-    if(!temItem) {
-      const novosFavoritos = [
-        ...storageFavoritos,
-        itemClicado
-      ];
-
-      localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
-
+    if(storageFavoritos){
       this.setState({
         eFavorito: true
       })
-    } else {
-      const todosMenosOqueEuQuero = storageFavoritos.filter((item) => item.id !== itemClicado.id)
 
-      localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
+      if(!temItem) {
+        const novosFavoritos = [
+          ...storageFavoritos,
+          itemClicado
+        ];
+  
+        localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
 
-      this.setState({
-        eFavorito: false
-      })
+        this.setState({
+          eFavorito: true
+        })
+
+      } else {
+        const todosMenosOqueEuQuero = storageFavoritos.filter((item) => item.id !== itemClicado.id)
+  
+        localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
+  
+        this.setState({
+          eFavorito: false
+        })
+      }
     }
-      
-   
+  }
+
+  onCloseCard = () => {
+    const itemClicado = this.props.item;
     
+    const storageAdicionados = JSON.parse(localStorage.getItem("adicionados")) || [];
+    
+     
+    const todosMenosOqueEuQuero = storageAdicionados.filter((item) => item.name !== itemClicado.name)
+
+    localStorage.setItem("adicionados", JSON.stringify(todosMenosOqueEuQuero));
   }
 
 
@@ -62,43 +78,54 @@ export default class Card extends React.Component {
 
     const temItem = storageFavoritos.find((item) => item.id === this.props.item.id)
 
-    if(temItem) {
-      this.setState({
-        eFavorito: true
-      })
-    }
+
+      if(temItem) {
+        this.setState({
+          eFavorito: true
+        })
+      }
+
+    // const itemClicado = this.props.item;
     
+    // const storageAdicionados = JSON.parse(localStorage.getItem("adicionados")) || [];
+    
+     
+    // const todosMenosOqueEuQuero = storageAdicionados.filter((item) => item.name !== itemClicado.name)
+
+    // localStorage.setItem("adicionados", JSON.stringify(todosMenosOqueEuQuero));
+
   }
 
   render(){
     return(
       <CardContainer className="card">
-        
         <ContentCard >
-    
-          <div className="container-favorito" onClick={() => this.adiconarFvoritos()}>
+          {this.props.close && (
+            <div className="icon-close" onClick={()=> this.onCloseCard()}>
+              <IoClose fontSize={25} color="#fff"/>
+            </div>
+          )}
+            
+          <div className="icon-favoritos" onClick={() =>   this.adiconarFvoritos()}>
             {this.state.eFavorito ? (
-              <IoHeartSharp color="#E71B27" size={20}/>
+              <IoHeartSharp color="#E71B27" size={22}/>
             ) : (
-            <IoHeartOutline size={20}/>
+              <IoHeartOutline size={22}/>
             )}
-            
           </div>
-            
-          
-         <BoxInfoFilme onClick={this.props.onClick}>
-          <img src={this.props.item.img} alt={`Capa do filme: ${this.props.item.name}`} width="100%"/>
-          
-            
-          <BoxAvaliacao>
-            <h3>{this.props.item.name}</h3>
-            <span>{this.props.item.nota}</span>
-          </BoxAvaliacao>
-          <p>{this.props.item.info}</p>
-         </BoxInfoFilme>
-        </ContentCard>
 
-      </CardContainer>
-    );
+          <BoxInfoFilme onClick={this.props.onClick}>
+            <img src={this.props.item.img} alt={`Capa do filme: ${this.props.item.name}`} width="100%"/>
+            <BoxAvaliacao>
+              <h3>{this.props.item.name}</h3>
+              <span>{this.props.item.nota}</span>
+            </BoxAvaliacao>
+            <p>{this.props.item.info}</p>
+          </BoxInfoFilme>
+        </ContentCard>
+     </CardContainer>
+        
+      
+    )
   }
 }

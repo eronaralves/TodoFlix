@@ -11,6 +11,7 @@ import MaisInfo from "../../assets/images/mais-info.svg"
 
 
 import {
+  Container,
   Modal,
   BoxButtonnBack,
   Button,
@@ -28,7 +29,8 @@ const infoStars = {
 
 export default class Moda extends React.Component {
   state = {
-    oAssistido: false
+    oAssistido: false,
+    eFavoritos: false
   }
 
   adiconarAssistidos = () => {
@@ -60,6 +62,35 @@ export default class Moda extends React.Component {
 
   }
 
+  Favoritos = () =>  {
+    const itemClicado = this.props.item
+    const storageFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    const temItem = storageFavoritos.find((item) => item.id === itemClicado.id)
+
+    if (!temItem) {
+      const novosFavoritos = [
+        ...storageFavoritos,
+        itemClicado
+      ]
+      
+      localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
+
+      this.setState({
+        eFavoritos: true
+      })
+      
+    } else {
+      const todosMenosOqueEuQuero = storageFavoritos.filter((item) => item.id !== itemClicado.id)
+
+      localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
+
+      this.setState({
+        eFavoritos: !this.state.eFavoritos
+      })
+      
+    }
+  }
+
   componentDidMount() {
 
     const storageAssistidos = JSON.parse(localStorage.getItem("assistidos")) || [];
@@ -76,29 +107,34 @@ export default class Moda extends React.Component {
 
   render(){
     return(
-      <Modal> 
-        <BoxButtonnBack onClick={this.props.onClose}>
-          <IoClose size={30} color="#fff" />
-        </BoxButtonnBack>
-        <img src={this.props.item.img} alt={`Posters do filme ${this.props.item.name}`} width="100%"/>
-        <BoxIcons>
-          <div>
-            {this.state.oAssistido ? (
-              <Button onClick={() => this.adiconarAssistidos()}>Ja assisti</Button>
-            ) : (
-              <Button onClick={() => this.adiconarAssistidos()}>Assisti Agora</Button>
-            )}
-          </div>
-          <img src={Avaliacao}/>
-          <img src={MaisInfo}/>
-        </BoxIcons>
-        <h2>{this.props.item.name}</h2>
-        <p>{this.props.item.info}"</p>
-        <BoxAvaliation>
-          <ReactStars {...infoStars}/>
-          <small>(4/5)</small>
-        </BoxAvaliation>
-      </Modal>
+      <>
+        <Container onClick={this.props.onClose}>
+
+        </Container>
+        <Modal> 
+          <BoxButtonnBack>
+            <IoClose size={30} color="#fff"  onClick={this.props.onClose}/>
+          </BoxButtonnBack>
+          <img src={this.props.item.img} alt={`Posters do filme ${this.props.item.name}`} width="100%"/>
+          <BoxIcons>
+            <div>
+              {this.state.oAssistido ? (
+                <Button onClick={() => this.adiconarAssistidos()}>Ja assisti</Button>
+              ) : (
+                <Button onClick={() => this.adiconarAssistidos()}>Assisti Agora</Button>
+              )}
+            </div>
+            <img src={Avaliacao} onClick={() => this.Favoritos()}/>
+            <img src={MaisInfo}/>
+          </BoxIcons>
+          <h2>{this.props.item.name}</h2>
+          <p>{this.props.item.info}"</p>
+          <BoxAvaliation>
+            <ReactStars {...infoStars}/>
+            <small>(4/5)</small>
+          </BoxAvaliation>
+        </Modal>
+      </>
     );
   }
 }

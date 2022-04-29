@@ -18,7 +18,8 @@ export default class Vistos extends React.Component {
   
   state = {
     todosAssistidos: [],
-    itemSelecionado: null
+    itemSelecionado: null,
+    teste: true
   }
 
 
@@ -54,13 +55,13 @@ export default class Vistos extends React.Component {
       return(
         <Container>
           {this.state.itemSelecionado && (
-          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
-        )}
+            <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+          )}
           <Content>  
             <h2>Ja assistidos</h2>
             <BoxCards>
               {this.state.todosAssistidos.map((item, index) => (
-                <Card key={index} item={item} onClick={() => this.handleShowModal(item)}/>
+                <Card key={index} item={item} onClick={() => this.handleShowModal(item)} teste={this.state.teste}/>
               ))}
             </BoxCards>
           </Content>

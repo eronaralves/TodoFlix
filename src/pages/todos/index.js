@@ -26,7 +26,6 @@ x
     this.setState({
       itemSelecionado: item
     })
-    // console.log(this.state.itemSelecionado)
   } 
 
   back = () => {
@@ -38,19 +37,19 @@ x
   
   render(){
     return(
-        <Container>
-          {this.state.itemSelecionado && (
+      <Container>
+        {this.state.itemSelecionado && (
           <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
         )}
-          <Content>  
-            <h2>Todos</h2>
-            <BoxCards>
+        <Content>  
+          <h2>Todos</h2>
+          <BoxCards>
             {this.state.posters.map((item, index) => (
               <Card key={index} item={item} onClick={() => this.handleShowModal(item)}/>
             ))}
-            </BoxCards>
-          </Content>
-        </Container>
+          </BoxCards>
+        </Content>
+      </Container>
         
       
     )
