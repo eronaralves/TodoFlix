@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 //Utils
 import {Posters} from "../../Utils/consts"
@@ -15,37 +15,53 @@ import {
   BoxCards
 } from "./styles"
 
-export default class Todos extends React.Component {
-  state = {
-    posters: Posters,
-    itemSelecionado: null
-  }
-x
-  handleShowModal = (item) => {
+export default function Todos(props){
+
+  const [posters, setPosters] = useState(Posters)
+  const [itemSelecionado, setItemSelecionado] = useState(null)
+
+  const handleShowModal = (item) => {
     
-    this.setState({
-      itemSelecionado: item
-    })
+    setItemSelecionado(item)
   } 
 
-  back = () => {
-    this.setState({
-      itemSelecionado: null
-    })
+  const back = () => {
+    setItemSelecionado(null)
   }
 
+  //componentDidMount
+  useEffect(() => {
+    const storagePoster = JSON.parse(localStorage.getItem("posters")) || [];
+    console.log(storagePoster)
+    if(storagePoster.length > 0) {
+      setPosters(storagePoster)
+    } else {
+      localStorage.setItem("posters", JSON.stringify(Posters))
+
+      setPosters(Posters)
+    }
+  }, [])
+
+  useEffect(() => {
+
+    const storagePoster = JSON.parse(localStorage.getItem("posters"))
+
+    setPosters(storagePoster)
+
+  }, [props.adicionouFilme])
+
   
-  render(){
+
     return(
       <Container>
-        {this.state.itemSelecionado && (
-          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} ></Modal>
+        {itemSelecionado && (
+          <Modal item={itemSelecionado} onClose={() => back()} ></Modal>
         )}
         <Content>  
           <h2>Todos</h2>
           <BoxCards>
-            {this.state.posters.map((item, index) => (
-              <Card key={index} item={item} onClick={() => this.handleShowModal(item)}/>
+            {posters.map((item, index) => (
+              <Card key={index} item={item} onClick={() => handleShowModal(item)}/>
             ))}
           </BoxCards>
         </Content>
@@ -53,5 +69,4 @@ x
         
       
     )
-  }
 }

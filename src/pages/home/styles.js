@@ -183,3 +183,12 @@ export const ArrowButton = styled.div`
     
   }
 `
+
+export const Button = styled.button`
+
+  
+
+  
+
+`
+

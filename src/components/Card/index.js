@@ -1,10 +1,4 @@
-import React from 'react';
-
-import Shrek from "../../assets/images/shrek.png"
-import SpiderMan from "../../assets/images/homem-aranha.png"
-import HojeQueroVoltar from "../../assets/images/hoje-eu-quero-voltar-sozinho.png"
-import QueHorasELa from "../../assets/images/que-horas-ela-volta.png"
-import UmSonhoLiberdador from "../../assets/images/um-sonho-liberdade.png"
+import React, { useState, useEffect } from "react"
 
 //icons
 import { IoHeartOutline, IoHeartSharp, IoClose } from 'react-icons/io5';
@@ -17,24 +11,20 @@ import {
 } from './styles';
 
 
+export default function Card(props) {
 
-export default class Card extends React.Component {
-  state = {
-    eFavorito: false
-   
-  }
 
-  adiconarFvoritos = () => {
-    const itemClicado = this.props.item;
+  const [eFavorito, setEFavorito] = useState(false)
+
+  const adiconarFvoritos = () => {
+    const itemClicado = props.item;
     
     const storageFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
     
     const temItem = storageFavoritos.find((item) => item.id === itemClicado.id);
     
     if(storageFavoritos){
-      this.setState({
-        eFavorito: true
-      })
+      setEFavorito(true)
 
       if(!temItem) {
         const novosFavoritos = [
@@ -44,88 +34,72 @@ export default class Card extends React.Component {
   
         localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
 
-        this.setState({
-          eFavorito: true
-        })
+        setEFavorito(true)
 
       } else {
         const todosMenosOqueEuQuero = storageFavoritos.filter((item) => item.id !== itemClicado.id)
   
         localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
   
-        this.setState({
-          eFavorito: false
-        })
+        setEFavorito(false)
       }
     }
   }
 
-  onCloseCard = () => {
-    const itemClicado = this.props.item;
+  const onCloseCard = () => {
+    const itemClicado = props.item;
     
-    const storageAdicionados = JSON.parse(localStorage.getItem("adicionados")) || [];
+    const storagePosters = JSON.parse(localStorage.getItem("posters")) || [];
     
      
-    const todosMenosOqueEuQuero = storageAdicionados.filter((item) => item.name !== itemClicado.name)
+    const todosMenosOqueEuQuero = storagePosters.filter((item) => item.name !== itemClicado.name)
 
-    localStorage.setItem("adicionados", JSON.stringify(todosMenosOqueEuQuero));
+    localStorage.setItem("posters", JSON.stringify(todosMenosOqueEuQuero));
+
+    props.estadoDoAdiconado(todosMenosOqueEuQuero)
   }
 
-
-
-  componentDidMount() {
+  useEffect(() => {
     const storageFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
-    const temItem = storageFavoritos.find((item) => item.id === this.props.item.id)
+    const temItem = storageFavoritos.find((item) => item.id === props.item.id)
+    if(temItem) {
+      setEFavorito(true)
+    }
+  }, [])
 
+ 
 
-      if(temItem) {
-        this.setState({
-          eFavorito: true
-        })
-      }
-
-    // const itemClicado = this.props.item;
-    
-    // const storageAdicionados = JSON.parse(localStorage.getItem("adicionados")) || [];
-    
-     
-    // const todosMenosOqueEuQuero = storageAdicionados.filter((item) => item.name !== itemClicado.name)
-
-    // localStorage.setItem("adicionados", JSON.stringify(todosMenosOqueEuQuero));
-
-  }
-
-  render(){
+ 
     return(
       <CardContainer className="card">
         <ContentCard >
-          {this.props.close && (
-            <div className="icon-close" onClick={()=> this.onCloseCard()}>
+          {props.close && (
+            <div className="icon-close" onClick={()=> onCloseCard()}>
               <IoClose fontSize={25} color="#fff"/>
             </div>
           )}
             
-          <div className="icon-favoritos" onClick={() =>   this.adiconarFvoritos()}>
-            {this.state.eFavorito ? (
+          <div className="icon-favoritos" onClick={() => adiconarFvoritos()}>
+            {eFavorito ? (
               <IoHeartSharp color="#E71B27" size={22}/>
             ) : (
               <IoHeartOutline size={22}/>
             )}
           </div>
 
-          <BoxInfoFilme onClick={this.props.onClick}>
-            <img src={this.props.item.img} alt={`Capa do filme: ${this.props.item.name}`} width="100%"/>
+          <BoxInfoFilme onClick={props.onClick}>
+            <img src={props.item.img} alt={`Capa do filme: ${props.item.name}`} width="100%"/>
             <BoxAvaliacao>
-              <h3>{this.props.item.name}</h3>
-              <span>{this.props.item.nota}</span>
+              <h3>{props.item.name}</h3>
+              <span>{props.item.nota}</span>
             </BoxAvaliacao>
-            <p>{this.props.item.info}</p>
+            <p>{props.item.info}</p>
           </BoxInfoFilme>
         </ContentCard>
      </CardContainer>
         
       
     )
-  }
+
 }

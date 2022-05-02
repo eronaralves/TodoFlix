@@ -35,19 +35,32 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default class App extends React.Component{
+
+  state = {
+    adicionouFilme: false
+  }
+
+  adicionadosFilmes = () => {
+
+    console.log("Foi DENOVoooooooo")
+    this.setState({
+      adicionouFilme: !this.state.adicionouFilme
+    })
+  }
   
   render(){
-    return(
+    return (
       <Router>
         <GlobalStyle/>
-        <Nav/>
+        <Nav filmeAdicionado={() => this.adicionadosFilmes()}/>
+
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/todos" element={<Todos/>}/>
+          <Route path="/" element={<Home adicionouFilme={this.state.adicionouFilme}/>}/>
+          <Route path="/todos" element={<Todos adicionouFilme={this.state.adicionouFilme}/>}/>
           <Route path="/pesquisa" element={<Pesquisa/>}/>
           <Route path="/favoritos" element={<Favoritos/>}/>
           <Route path="/vistos" element={<Vistos/>}/>
-          <Route path="/adicionados" element={<Adicionados/>}/>
+          <Route path="/adicionados" element={<Adicionados adicionouFilme={this.state.adicionouFilme}/>}/>
         </Routes>
       </Router>
 

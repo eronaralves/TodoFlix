@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react"
 import ReactStars from "react-rating-stars-component";
 
 //images
@@ -21,44 +21,41 @@ import {
   Boxconfirmation
 } from "./styles"
 
+export default function ModalAddFilmes(props) {
 
-const infoStars = {
-  size: 37,
-  color: "#ff",
-  activeColor: "red",
-  a11y: true
+  const [adcionarFilmes, setAdicionarFilmes] = useState({name: "",
+  img: Shrek,
+  info: "",
+  jaAssisti: false,
+  nota: 0,})
+  const [name, setName] = useState("")
+  const [img, setImg] = useState(Shrek)
+  const [info, setInfo] = useState("")
+  const [jaAssisti, setJaAssisti] = useState(false)
+  const [nota, setNota] = useState(0)
   
-}
 
 
+  const inputNome = (event) => {
 
-export default class ModalAddFilmes extends React.Component {
-  state = {
-    
-
-    name: "",
-    img: Shrek,
-    info: "",
-    jaAssisti: false,
-    nota: 4,
+    setName(event.target.value)
     
   }
 
-  inputNome = (event) => {
-    this.setState({
-      name: event.target.value,
-    })
+  const inputTextArea = (event) => {
+
+    setInfo(event.target.value)
+    
   }
 
-  inputTextArea = (event) => {
-    this.setState({
-      info: event.target.value,
-    })
-  }
+  const ratingChanged = (newRating) => {
+    setNota(newRating)
+  };
 
-  StorageInput = () => {
-    const itemClicado = this.state
-    const storageAssistidos = JSON.parse(localStorage.getItem("adicionados")) || [];
+  const storageInput = () => {
+    const itemClicado = adcionarFilmes
+    const storageAssistidos = JSON.parse(localStorage.getItem("posters")) || [];
+  
     
     
     if(storageAssistidos) {
@@ -67,30 +64,34 @@ export default class ModalAddFilmes extends React.Component {
           itemClicado
         ]
 
-        localStorage.setItem("adicionados", JSON.stringify(novos));
+        localStorage.setItem("posters", JSON.stringify(novos));
+        
     } else {
       let novos = [
         itemClicado
       ]
-      localStorage.setItem("adicionados", JSON.stringify(novos));
+      localStorage.setItem("posters", JSON.stringify(novos));
     }
 
-    this.props.modalAtivar(false)
+    props.modalAtivar(false)
+    props.filmeAdicionado()
   }
 
-  sairDoModal = () => {
-    this.props.modalAtivar(false)
+  const sairDoModal = () => {
+    props.modalAtivar(false)
   }
 
-  render(){
+
+
+
     return(
       <>
-        {this.props.showModal && (
+        {props.showModal && (
         <>
-          <Container onClick={this.props.onClose}>
+          <Container onClick={props.onClose}>
           </Container>
           <Content>
-            <BoxOnCLocse onClick={this.props.onClose}>
+            <BoxOnCLocse onClick={props.onClose}>
               <IoClose size={30} color="#fff" />
             </BoxOnCLocse>
             <BoxForm>
@@ -99,14 +100,14 @@ export default class ModalAddFilmes extends React.Component {
                 
                 <BoxLabel>
                   <label htmlFor="name">Nome</label>
-                  <input id="name"ype="text" wrap="hard" onChange={this.inputNome}/>
+                  <input id="name" type="text" wrap="hard" onChange={inputNome}/>
                 </BoxLabel>
                 <BoxLabel>
                   <div>
                     <label htmlFor="descricao">Descrição</label>
                     <span>0/200</span>
                     </div>
-                  <textarea  id="nao-assistido" cols="30" rows="5" onChange={this.inputTextArea}></textarea>
+                  <textarea  id="nao-assistido" cols="30" rows="5" onChange={inputTextArea}></textarea>
                 </BoxLabel>
 
                 <label>Status</label>
@@ -123,8 +124,14 @@ export default class ModalAddFilmes extends React.Component {
                 <BoxNota>
                   <h3>Nota</h3>
                   <div>
-                    <ReactStars {...infoStars}/> 
-                    (0/5)
+                    <ReactStars
+                      value={nota}
+                      onChange={(starRating) => ratingChanged(starRating)}
+                      size={37}
+                      color="#fff"
+                      activeColor="#E71B27"
+                    /> 
+                    ({nota}/5)
                   </div>
                 </BoxNota>
               </form>
@@ -139,13 +146,13 @@ export default class ModalAddFilmes extends React.Component {
 
             </BoxForm>
             <Boxconfirmation>
-              <button onClick={() => this.sairDoModal()}>Cancelar</button>
-              <button onClick={() => this.StorageInput()}>Confirmar</button>
+              <button onClick={() => sairDoModal()}>Cancelar</button>
+              <button onClick={() => storageInput()}>Confirmar</button>
             </Boxconfirmation>
           </Content>
         </>
       )}
       </>
     );
-  }
+
 }

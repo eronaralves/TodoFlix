@@ -27,7 +27,7 @@ import {
 
 
 
-export default function Nav() {
+export default function Nav(props) {
 
   const [routeBack, setRouteBack] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -62,6 +62,11 @@ export default function Nav() {
     
   }
 
+  const novoFilmeAdicionado = () => {
+    console.log("Foiiiii")
+    props.filmeAdicionado()
+  }
+
 
   useEffect(() => {
     
@@ -78,7 +83,7 @@ export default function Nav() {
 
   return(
     <>
-      <ModalAddFilmes showModal={modalAtivar} onClose={() => closeModal()} modalAtivar={setmodalAtivar}/>
+      <ModalAddFilmes showModal={modalAtivar} onClose={() => closeModal()} modalAtivar={setmodalAtivar} filmeAdicionado={() => novoFilmeAdicionado()}/>
       <Navigation>
         <Container>
           <Content>

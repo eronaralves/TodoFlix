@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 // Components
 import Card from "../../components/Card";
@@ -21,7 +21,8 @@ import {
   CarouselBox,
   CarouselContainer,
   ArrowButton,
-  TitleSection
+  TitleSection,
+  Button
 } from "./styles"
 
 const infoCarousel = {
@@ -36,15 +37,14 @@ const infoCarousel = {
   ]
 }
 
-export default class Home extends React.Component {
+export default function Home(props) {
   
-  state = {
-    posters: Posters,
-    itemSelecionado: null
-  }
 
-  myArrow({ type, onClick, isEdge }) {
-    
+
+  const [posters, setPosters] = useState(Posters)
+  const [itemSelecionado, setItemSelecionado] = useState(null)
+
+  const myArrow = ({ type, onClick, isEdge }) => {
     return (
       <ArrowButton type={type} isEdge={isEdge} onClick={onClick}>
         <img src={ArrowImage} alt=""/>
@@ -52,48 +52,47 @@ export default class Home extends React.Component {
     )
   }
   
-  handleShowModal = (item) => {
-    this.setState({
-      itemSelecionado: item,
-    })
+  const handleShowModal = (item) => {
+    setItemSelecionado(item)
   }
 
-  back = () => {
-
-    this.setState({
-      itemSelecionado: null
-    })
+  const back = () => {
+    setItemSelecionado(null)
   }
-  Favoritos = () =>  {
-    const itemClicado = this.props.item
-    const storageFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    const temItem = storageFavoritos.find((item) => item.id === itemClicado.id)
+  
 
-    if (!temItem) {
-      const novosFavoritos = [
-        ...storageFavoritos,
-        itemClicado
-      ]
-      
-      localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
-      
+  useEffect(() => {
+
+    const storagePosters = JSON.parse(localStorage.getItem("posters")) || [];
+
+    if(storagePosters.length > 0) {
+
+      setPosters(storagePosters)      
     } else {
-      const todosMenosOqueEuQuero = storageFavoritos.filter((item) => item.id !== itemClicado.id)
+      localStorage.setItem("posters", JSON.stringify(Posters))
 
-      localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
-
-      
+      setPosters(Posters)
     }
+    
+
+  }, []);
+
+  const atualizarPosters = () => {
+    const storagePosters = JSON.parse(localStorage.getItem("posters"))
+    
+    setPosters(storagePosters)
   }
 
+  useEffect(() => {
+    atualizarPosters()
 
-  render(){
-    console.log(this.state.itemSelecionado)
-    
+  }, [props.adicionouFilme]);
+
+
     return(
       <>
-        {this.state.itemSelecionado && (
-          <Modal item={this.state.itemSelecionado} onClose={() => this.back()} favoritosModal={() => this.favoritos()} ></Modal>
+        {itemSelecionado && (
+          <Modal item={itemSelecionado} onClose={() => back()} ></Modal>
         )}
 
         <Container>
@@ -109,10 +108,10 @@ export default class Home extends React.Component {
         <BoxCards>
           <TitleSection>Destaques</TitleSection>
           <CarouselContainer>
-            <CarouselBox renderArrow={this.myArrow} {...infoCarousel}>
+            <CarouselBox renderArrow={myArrow} {...infoCarousel}>
 
-              {this.state.posters.map((item, index) => (
-                <Card key={index} item={item} onClick={() => this.handleShowModal(item)}/>
+              {posters.map((item, index) => (
+                <Card key={index} item={item} onClick={() => handleShowModal(item)}/>
               ))}
     
             </CarouselBox>
@@ -120,5 +119,4 @@ export default class Home extends React.Component {
       </BoxCards>
       </>
     )
-  }
 }

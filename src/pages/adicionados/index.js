@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 //Components
 import Card from "../../components/Card"
@@ -8,43 +8,51 @@ import Container from "../../components/Container"
 
 
 import {
-  Content,
-  BoxIcon
+  Content
 } from "./styles"
 
-const storageAdicionados = localStorage.getItem("adicionados")
-const jsonStorageFavoritos = JSON.parse(storageAdicionados) 
 
-export default class Adicionados extends React.Component {
+export default function Adicionados(props) {
 
-  state = {
-    todosAdicionados: jsonStorageFavoritos,
-    close: true,
+  const [posters, setPosters] = useState(null)
+  const [close, setClose] = useState(true)
+  const [itemSelecionado, setItemSelecionado] = useState(null)
+
+  const handleShowModal = (item) => {
+    setItemSelecionado(item)
   }
 
-  
- 
+  const back = () => {
+    setItemSelecionado(null)
+  }
 
-  render(){
+
+  useEffect(() => {
+    const storagePosters = JSON.parse(localStorage.getItem("posters"))
+
+    setPosters(storagePosters)
+
+  }, [props.adicionouFilme])
+
+
     return(
-      <Container>
-        {storageAdicionados ? (
-          <div>
-            
-              <Content>
-                {this.state.todosAdicionados.map((item, index) => ( 
-                   
-                    <Card key={index} item={item} onClick={() => this.handleShowModal(item)} close={this.state.close} />
-                   
-                ))}
-              </Content>
-            
-          </div>
-        ) : (
-          <>
-          </>
+      <>
+        {itemSelecionado && (
+          <Modal item={itemSelecionado} onClose={() => back()} ></Modal>
         )}
+      <Container>
+          <Content>
+            {posters !== null && (
+              <>
+                {posters.map((item, index) => (   
+                  <Card key={index} item={item} onClick={() => handleShowModal(item)} close={close} estadoDoAdiconado={setPosters}/>
+
+                ))}
+              </>
+            )}
+          </Content>            
       </Container>
+      </>
     )
-  }
+
 }
