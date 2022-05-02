@@ -38,7 +38,7 @@ export default function Adicionados(props) {
     return(
       <>
         {itemSelecionado && (
-          <Modal item={itemSelecionado} onClose={() => back()} ></Modal>
+          <Modal item={itemSelecionado} onClose={() => back()}> </Modal>
         )}
       <Container>
           <Content>
@@ -46,7 +46,6 @@ export default function Adicionados(props) {
               <>
                 {posters.map((item, index) => (   
                   <Card key={index} item={item} onClick={() => handleShowModal(item)} close={close} estadoDoAdiconado={setPosters}/>
-
                 ))}
               </>
             )}

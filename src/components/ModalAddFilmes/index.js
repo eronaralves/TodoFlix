@@ -23,11 +23,7 @@ import {
 
 export default function ModalAddFilmes(props) {
 
-  const [adcionarFilmes, setAdicionarFilmes] = useState({name: "",
-  img: Shrek,
-  info: "",
-  jaAssisti: false,
-  nota: 0,})
+
   const [name, setName] = useState("")
   const [img, setImg] = useState(Shrek)
   const [info, setInfo] = useState("")
@@ -53,7 +49,7 @@ export default function ModalAddFilmes(props) {
   };
 
   const storageInput = () => {
-    const itemClicado = adcionarFilmes
+    const itemClicado = {name,img,info,jaAssisti,nota}
     const storageAssistidos = JSON.parse(localStorage.getItem("posters")) || [];
   
     
