@@ -41,7 +41,7 @@ export default function Card(props) {
         localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
   
         setEFavorito(false)
-        window.location.reload(true)
+        
       }
     }
   }
