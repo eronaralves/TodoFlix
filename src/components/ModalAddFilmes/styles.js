@@ -38,12 +38,22 @@ export const BoxOnCLocse = styled.div`
   top: 20px;
 
   text-align: right;
-  /* margin: 25px 0px; */
+
+  @media(max-width: 550px) {
+    margin: 25px 0px;
+
+    button {
+      margin-bottom: 5px;
+    }
+
+  }
+  
   
 `
 export const BoxForm = styled.div`
   
   display: flex;
+  
   
 
   h2 {
@@ -51,7 +61,7 @@ export const BoxForm = styled.div`
     font-weight: 500;
     line-height: 33px;
     
-    margin-bottom: 44px;
+    margin: 24px 0px 40px 0px;
   }
 
   label {
@@ -67,7 +77,8 @@ export const BoxForm = styled.div`
     flex-wrap: wrap;
 
     h2 {
-      margin: 15px 0px;
+      margin-top: 30px;
+      
     }
   }
 
