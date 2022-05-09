@@ -18,12 +18,12 @@ export default function Card(props) {
   const adiconarFvoritos = () => {
     const itemClicado = props.item;
     
-    const storageFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    const storageFavoritos = JSON.parse(localStorage.getItem("favoritos"));
     
     const temItem = storageFavoritos.find((item) => item.id === itemClicado.id);
     
     if(storageFavoritos){
-      setEFavorito(true)
+      
 
       if(!temItem) {
         const novosFavoritos = [
@@ -76,7 +76,7 @@ export default function Card(props) {
       <CardContainer className="card">
         <ContentCard >
           {props.close && (
-            <div className="icon-close" onClick={()=> onCloseCard()}>
+            <div className="icon-close" onClick={() => onCloseCard()}>
               <IoClose fontSize={25} color="#fff"/>
             </div>
           )}

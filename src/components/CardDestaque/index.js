@@ -21,7 +21,6 @@ export default function CardDestaque(props) {
     
     if(storageFavoritos){
       setEFavorito(true)
-
       if(!temItem) {
         const novosFavoritos = [
           ...storageFavoritos,
@@ -45,29 +44,11 @@ export default function CardDestaque(props) {
   useEffect(() => {
     const itemClicado = props.item;
     const storageFavoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+
+    const temItem = storageFavoritos.find((item) => item.id === itemClicado.id)
     
-    const temItem = storageFavoritos.find((item) => item.id === itemClicado.id);
-    
-    if(storageFavoritos){
+    if(temItem) {
       setEFavorito(true)
-
-      if(!temItem) {
-        const novosFavoritos = [
-          ...storageFavoritos,
-          itemClicado
-        ];
-  
-        localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
-
-        setEFavorito(true)
-
-      } else {
-        const todosMenosOqueEuQuero = storageFavoritos.filter((item) => item.id !== itemClicado.id)
-  
-        localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
-  
-        setEFavorito(false)
-      }
     }
   }, [])
 

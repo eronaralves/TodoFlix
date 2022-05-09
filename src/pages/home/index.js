@@ -99,8 +99,8 @@ export default function Home(props) {
         )}
 
         <Container>
-          {cardDestaque.map((item) => (
-            <CardDestaque item={item}/>
+          {cardDestaque.map((item, index) => (
+            <CardDestaque item={item} key={index}/>
           ))}
 
         </Container>
