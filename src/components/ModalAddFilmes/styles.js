@@ -27,20 +27,23 @@ export const Content = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 5;
 
   padding: 16px 50px;
   color: #fff;
 `
 export const BoxOnCLocse = styled.div`
-  width: 100%;
-  text-align: right;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 
-  margin-bottom: 25px;
+  text-align: right;
+  /* margin: 25px 0px; */
   
 `
 export const BoxForm = styled.div`
-  display: flex; 
+  
+  display: flex;
   
 
   h2 {
@@ -57,13 +60,23 @@ export const BoxForm = styled.div`
     line-height: 17px;
 
     display: inline-flex;
-
-
   }
+
+  @media(max-width: 550px) {
+    display: flex;
+    flex-wrap: wrap;
+
+    h2 {
+      margin: 15px 0px;
+    }
+  }
+
 `
 
 export const BoxLabel = styled.div`
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
+
 
   display: flex;
   flex-direction: column;
@@ -79,6 +92,7 @@ export const BoxLabel = styled.div`
   }
 
   input, textarea {
+    width: 100%;
     margin-top: 8px;
     padding: 11px;
     border: none;
@@ -118,10 +132,11 @@ export const BoxRadio = styled.div`
 `
 
 export const BoxCoverImage = styled.div`
-  width: 100%;
 
   display: flex;
   flex-direction: column;
+
+
 
   margin: 50px 30px;
 
@@ -158,6 +173,15 @@ export const BoxCoverImage = styled.div`
     margin-top: 20px;
   }
 
+  @media(max-width: 550px) {
+    margin: 8px 0px;
+
+    button {
+      margin-bottom: 5px;
+    }
+
+  }
+
 `
 
 export const BoxNota = styled.div`
@@ -190,6 +214,12 @@ export const Boxconfirmation = styled.div`
   & button:nth-child(2) {
     background: red;
     
+  }
+
+  @media(max-width: 550px) {
+    margin: 16px 0px;
+
+
   }
 
 `
