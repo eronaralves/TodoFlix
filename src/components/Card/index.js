@@ -13,7 +13,6 @@ import {
 
 export default function Card(props) {
 
-
   const [eFavorito, setEFavorito] = useState(false)
 
   const adiconarFvoritos = () => {
@@ -42,6 +41,7 @@ export default function Card(props) {
         localStorage.setItem("favoritos", JSON.stringify(todosMenosOqueEuQuero));
   
         setEFavorito(false)
+        window.location.reload(true)
       }
     }
   }
@@ -56,6 +56,7 @@ export default function Card(props) {
 
     localStorage.setItem("posters", JSON.stringify(todosMenosOqueEuQuero));
 
+    // window.location.reload(true)
     props.estadoDoAdiconado(todosMenosOqueEuQuero)
   }
 
@@ -89,7 +90,7 @@ export default function Card(props) {
           </div>
 
           <BoxInfoFilme onClick={props.onClick}>
-            <img src={props.item.img} alt={`Capa do filme: ${props.item.name}`} width="100%"/>
+            <img src={props.item.img} alt={`Capa do filme: ${props.item.name}`} />
             <BoxAvaliacao>
               <h3>{props.item.name}</h3>
               <span>{props.item.nota}</span>

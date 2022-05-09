@@ -5,6 +5,7 @@ import Shrek from "../assets/images/shrek.png"
 import HojeEuQuero from "../assets/images/hoje-eu-quero-voltar-sozinho.png"
 import QueHorasElaVolta from "../assets/images/que-horas-ela-volta.png"
 import UmSonhoLiberdade from "../assets/images/um-sonho-liberdade.png"
+import CapitaoFantastico from "../assets/images/capitao-fantastico.png"
 
 
 export const Posters = [
@@ -55,5 +56,16 @@ export const Posters = [
     info: "Val é a fiel empregada domestica de uma família rica. Mas a chegada de sua filha gera tensão na casa e faz com que ela comece a questionar esse papel.",
     jaAssisti: false,
     nota: 0,
+  }
+]
+
+export const Destaque = [
+  {
+    name: "Capitão Fantastico",
+    info: "Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.",
+    jaAssisti: false,
+    nota: 3,
+    img: CapitaoFantastico
+    
   }
 ]

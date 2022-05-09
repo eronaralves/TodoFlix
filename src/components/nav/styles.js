@@ -23,6 +23,7 @@ export const Content = styled.div`
 export const BoxLogo = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 
   h1 {
     color: red;
@@ -33,36 +34,73 @@ export const BoxLogo = styled.div`
     margin-top: 5px;
   }
 
-  details[open] {
-    position: relative;
-    left: 0;
-    top: 68px;
-
-  }
-
-  details {
-    width: 136px;
-    padding: 0px 10px 0px 10px;
-    background: #000;
-    cursor: pointer;
-
-    a {
-      width: 100%;
-      text-align: left;
-      margin: 0px;
-      color: #fff;
-      text-decoration: none;
-    }
-  }
-
-  details > ul  {
-    margin: 8px 15px;
-
-    list-style: none;
-    line-height: 30px;
+  @media(max-width: 500px) {
+    img {
+      width: 80px;
+      margin-right: 10px;
+    } 
     
   }
 
+`
+
+export const MobileMenu = styled.div`
+
+    cursor: pointer;
+    display: none;
+    margin-right: 10px;
+
+
+    
+
+
+    div  div {
+      width: 30px;
+      height: 3px;
+      background-color: #fff;
+      margin-bottom: 5px;
+    }
+      
+
+    @media(max-width: 500px) {
+      display: block;
+    }
+
+`
+
+export const RotasMenuMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  background-color: #000;
+
+  a {
+    text-decoration: none;
+    padding: 10px 5px;
+
+    color: #fff;
+
+  }
+
+  a:hover {
+    background-color: #171717;
+  }
+
+  button {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    padding: 0px 15px;
+
+
+    border: none;
+    
+    color: #fff;
+    background: red;
+
+  }
+  
 
 `
 

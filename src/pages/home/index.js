@@ -4,10 +4,11 @@ import React, { useState, useEffect } from "react"
 import Card from "../../components/Card";
 import Modal from "../../components/Modal";
 import Container from "../../components/Container"
+import CardDestaque from "../../components/CardDestaque"
 
 
 //Ultis
-import {Posters} from "../../Utils/consts"
+import {Posters, Destaque} from "../../Utils/consts"
 
 
 // Images
@@ -32,9 +33,10 @@ const infoCarousel = {
   breakPoints: [
     { width: 1, itemsToShow: 1 },
     { width: 400, itemsToShow: 2 },
-    { width: 550, itemsToShow: 3 },
+    { width: 550, itemsToShow: 3,},
     { width: 850, itemsToShow: 5 },
   ]
+  
 }
 
 export default function Home(props) {
@@ -42,6 +44,7 @@ export default function Home(props) {
 
 
   const [posters, setPosters] = useState(Posters)
+  const [cardDestaque, setCardDestaque] = useState(Destaque)
   const [itemSelecionado, setItemSelecionado] = useState(null)
 
   const myArrow = ({ type, onClick, isEdge }) => {
@@ -96,14 +99,10 @@ export default function Home(props) {
         )}
 
         <Container>
-          <BoxDestaque>
-            <img src={CapitaoFantastico} alt="Capa do filme Capitão Fantastico" width="450px"/> 
-            <InfoDestaque>
-              <span>Visto recentemente</span> 
-              <h2>Capitão Fantástico</h2>
-              <p>Nas florestas do estado de Washington, um pai cria seus seis filhos longe da civilização, em uma rígida rotina de aventuras. Ele é forçado a deixar o isolamento e leva sua família para encarar o mundo, desafiando sua ideia do que significa ser pai.</p>
-            </InfoDestaque>  
-          </BoxDestaque>
+          {cardDestaque.map((item) => (
+            <CardDestaque item={item}/>
+          ))}
+
         </Container>
         <BoxCards>
           <TitleSection>Destaques</TitleSection>

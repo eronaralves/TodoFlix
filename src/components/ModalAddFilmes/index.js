@@ -77,6 +77,15 @@ export default function ModalAddFilmes(props) {
     props.modalAtivar(false)
   }
 
+  const handleChange1 = () => {
+    
+  
+    console.log(e)
+  } 
+
+  const handleChange2 = () => {
+    
+  }
 
 
 
@@ -96,7 +105,7 @@ export default function ModalAddFilmes(props) {
                 
                 <BoxLabel>
                   <label htmlFor="name">Nome</label>
-                  <input id="name" type="text" wrap="hard" onChange={inputNome}/>
+                  <input id="name" type="text"wrap="hard" onChange={inputNome}/>
                 </BoxLabel>
                 <BoxLabel>
                   <div>
@@ -109,11 +118,11 @@ export default function ModalAddFilmes(props) {
                 <label>Status</label>
                 <BoxRadio>
                   <div>
-                    <input id="assistido" type="radio" />
+                    <input id="assistido" type="radio" name="Assistidos" onChange={() => handleChange1(this)} value="dsad"/>
                     <label htmlFor="assistido">Já assisti</label> 
                   </div>
                   <div>
-                    <input id="nao-assistido" type="radio" />
+                    <input id="nao-assistido" type="radio" name="Assistidos" onChange={() => handleChange2()} value={false}/>
                     <label htmlFor="nao-assistido">Ainda não assisti </label>
                   </div>
                 </BoxRadio>

@@ -17,6 +17,8 @@ import Lupa from "../../assets/images/lupa.png"
 import {
   Navigation,
   Content,
+  MobileMenu,
+  RotasMenuMobile,
   BoxLogo,
   BoxPerfil,
   List,
@@ -33,6 +35,7 @@ export default function Nav(props) {
   const [searchValue, setSearchValue] = useState("");
   const [modalAtivar, setmodalAtivar] = useState(false)
   const [itemSelecionado, setItemSelecionado] = useState(null)
+  const [teste, setTeste] = useState(false)
 
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
@@ -63,8 +66,11 @@ export default function Nav(props) {
   }
 
   const novoFilmeAdicionado = () => {
-    console.log("Foiiiii")
     props.filmeAdicionado()
+  }
+
+  const openMobileMenu = () => {
+    setTeste(!teste)
   }
 
 
@@ -88,9 +94,30 @@ export default function Nav(props) {
         <Container>
           <Content>
             <BoxLogo>
+              <MobileMenu onClick={() => openMobileMenu()}>
+
+                  <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  {teste && (
+                  <RotasMenuMobile className="dropdown-content">
+                    <Link to="/">Inicio</Link>
+                    <Link to="/todos">Todos</Link>
+                    <Link to="/favoritos">Favoritos</Link>
+                    <Link to="/vistos">Já vistos</Link>
+                    <Link to="/adicionados">Adicionados</Link>
+                    <button onClick={() => aparecerModal()}>Adicionar Filmes</button>
+                  </RotasMenuMobile>
+                )}
+                
+                
+                
+              </MobileMenu>
               <Link to="/"> <img src={ImageLogo} alt="Logo da Todoflix" width="103px" height="40px"/></Link>
               <List>
-                <li><Link className="responsivo" to="/">Inicio</Link></li>
+                
 
                 <li className="dropdown">
                   <Link to="/">Categorias</Link>

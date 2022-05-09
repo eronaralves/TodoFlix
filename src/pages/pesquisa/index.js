@@ -35,6 +35,13 @@ export default function Pesquisa(){
   }
 
   useEffect(() => {
+    const storageAssistidos = JSON.parse(localStorage.getItem("posters")) || [];
+
+    setPosters(storageAssistidos)
+
+  }, [])
+
+  useEffect(() => {
     if(search) {
       const params = new URLSearchParams(search) 
       const value  = params.get("query");

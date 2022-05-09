@@ -99,7 +99,7 @@ export default class Moda extends React.Component {
             <img src={MaisInfo}/>
           </BoxIcons>
           <h2>{this.props.item.name}</h2>
-          <p>{this.props.item.info}"</p>
+          <p>{this.props.item.info}</p>
           <BoxAvaliation>
             <ReactStars {...infoStars}/>
             <small>(4/5)</small>

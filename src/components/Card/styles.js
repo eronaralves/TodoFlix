@@ -10,8 +10,6 @@ export const CardContainer = styled.div`
   margin-right: 10px;
   margin-bottom: 60px;
 
-  
-  
 `
 
 export const ContentCard = styled.div`  
@@ -44,7 +42,7 @@ export const ContentCard = styled.div`
     left: 5px;
     top: 5px;
 
-    z-index: 2;
+    z-index: 1;
   }
 
   h3 {

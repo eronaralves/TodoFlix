@@ -126,6 +126,8 @@ export const CarouselBox = styled(Carousel)`
   .rec-slider-container {
     margin: 0px;
   }
+
+  
   
 `
 

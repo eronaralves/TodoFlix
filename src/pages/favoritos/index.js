@@ -38,13 +38,13 @@ export default class Favoritos extends React.Component {
   }
 
   componentDidMount() {
-    const storageFavoritos = localStorage.getItem("favoritos")
+    const storageFavoritos = JSON.parse(localStorage.getItem("favoritos"))
+    
 
     if(storageFavoritos) {
-      const jsonStorageFavoritos = JSON.parse(storageFavoritos)
 
       this.setState({
-        todosFavoritos: jsonStorageFavoritos
+        todosFavoritos: storageFavoritos
       })
     }
   }
@@ -59,7 +59,7 @@ export default class Favoritos extends React.Component {
             <h2>Favoritos</h2>
             <BoxCards>
               {this.state.todosFavoritos.map((item, index) => (
-                <Card key={index} item={item} onClick={() => this.handleShowModal(item)} close={this.state.close}/>
+                <Card key={index} item={item} onClick={() => this.handleShowModal(item)} close={this.state.close} estadoDoFavoritios={this.state.todosFavoritos}/>
               ))}
             </BoxCards>
           </Content>
