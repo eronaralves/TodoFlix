@@ -49,6 +49,7 @@ export const MobileMenu = styled.div`
     cursor: pointer;
     display: none;
     margin-right: 10px;
+    z-index: 3;
 
 
     
