@@ -87,7 +87,7 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    atualizarPosters()
+    
 
   }, [props.adicionouFilme]);
 

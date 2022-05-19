@@ -21,7 +21,7 @@ export const Posters = [
     id: 2,
     name: "Hoje Eu Quero Voltar...",
     img: HojeEuQuero,
-    info: "Após ser picado por uma aranha radioativa, o garoto Miles Morales logo aprende a lançar teias com seus parceiros de um universo alternativo.",
+    info: "Um novo colega de sala transforma a vida do estudante Leonardo, que também é cego, e complica sua amizade com sua melhor amiga.",
     jaAssisti: false,
     nota: 5,
   },
@@ -29,7 +29,8 @@ export const Posters = [
     id: 3,
     name: "Spider-Man",
     img: HomemAranha,
-    info: "Um novo colega de sala transforma a vida do estudante Leonardo, que também é cego, e complica sua amizade com sua melhor amiga.",
+    info: "Após ser picado por uma aranha radioativa, o garoto Miles Morales logo aprende a lançar teias com seus parceiros de um universo alternativo.",
+
     jaAssisti: false,
     nota: 3,
   },
